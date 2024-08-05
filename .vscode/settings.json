@@ -29,5 +29,8 @@
     },
     "editor.formatOnSave": true,
     "editor.detectIndentation": false,
-    "python.analysis.extraPaths": ["./src/pythonTest/ch6 function/function"]
+    "python.analysis.extraPaths": [
+        "./src/pythonTest/ch6 function/function",
+        "./src/pythonTest/ch7 class/class"
+    ]
 }
