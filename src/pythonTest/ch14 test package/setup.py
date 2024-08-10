@@ -1,4 +1,4 @@
-from distutils import setup
+from distutils.core import setup
 setup(
     name = 'setupFile',
     version = '1.0',
