@@ -15,3 +15,7 @@ conda create -n algorithmPractice python=3.8 -y
 conda activate algorithmPractice
 pip install pyQt5 pymysql requests pymongo scikit-learn matplotlib scipy parsel prettytable pyinstaller
 ```
+
+```
+pip install d2l==0.17.6 torch numpy 
+```
