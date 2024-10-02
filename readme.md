@@ -17,5 +17,5 @@ pip install pyQt5 pymysql requests pymongo scikit-learn matplotlib scipy parsel 
 ```
 
 ```
-pip install d2l==0.17.6 torch numpy 
+pip install d2l==0.17.6 torch numpy kaggle
 ```

@@ -1,1 +1,0 @@
-nums[i] >= subset[subset.size()-1]
