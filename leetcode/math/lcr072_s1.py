@@ -2,6 +2,7 @@ from typing import List
 from queue import Queue
 import math
 class Solution:
+    # 袖珍计算器法
     def mySqrt(self, x: int) -> int:
         if 0 == x:
             return 0
