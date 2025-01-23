@@ -39,6 +39,6 @@ int main() {
    // 示例二叉树
    Solution solution;
    string s = "azxxzy";
-   int result = solution.maxProfit(nums);
+   string result = solution.removeDuplicates(s);
    std::cout << "result: " << result << std::endl;
 }
