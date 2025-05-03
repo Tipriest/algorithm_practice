@@ -1,5 +1,5 @@
 
-path: /home/tipriest/data/seg_risky/dataset
+path: /home/tipriest/data/seg_risky/datasetYOLO
 train: train
 val: valid
 

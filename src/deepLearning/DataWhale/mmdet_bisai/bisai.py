@@ -23,7 +23,7 @@ model = dict(
         use_abs_pos_embed=False,
         patch_norm=True,
         out_indices=(0, 1, 2, 3),
-        ),
+    ),
     neck=dict(
         type='FPN',
         in_channels=[192, 384, 768, 1536],
@@ -44,8 +44,8 @@ model = dict(
             target_stds=[1.0, 1.0, 1.0, 1.0]),
         loss_cls=dict(
             type='CrossEntropyLoss', use_sigmoid=True, loss_weight=1.0),
-        loss_bbox = dict(type='SmoothL1Loss', beta=1.0 / 9.0, loss_weight=1.0),
-        ),
+        loss_bbox=dict(type='SmoothL1Loss', beta=1.0 / 9.0, loss_weight=1.0),
+    ),
     roi_head=dict(
         type='CascadeRoIHead',
         num_stages=3,
@@ -225,7 +225,7 @@ model = dict(
                 pos_weight=-1,
                 debug=False),
         ],
-        ),
+    ),
     test_cfg=dict(
         rpn=dict(
             nms_pre=1000,
@@ -259,25 +259,25 @@ train_pipeline = [
             'keep_ratio':
             True
         }],
-                    [{
-                        'type': 'RandomChoiceResize',
+            [{
+                'type': 'RandomChoiceResize',
                         'scales': [(400, 1333), (500, 1333), (600, 1333)],
                         'keep_ratio': True
-                    }, {
-                        'type': 'RandomCrop',
+            }, {
+                'type': 'RandomCrop',
                         'crop_type': 'absolute_range',
                         'crop_size': (384, 600),
                         'allow_negative_crop': True
-                    }, {
-                        'type':
-                        'RandomChoiceResize',
-                        'scales': [(480, 1333), (512, 1333), (544, 1333),
-                                   (576, 1333), (608, 1333), (640, 1333),
-                                   (672, 1333), (704, 1333), (736, 1333),
-                                   (768, 1333), (800, 1333)],
-                        'keep_ratio':
-                        True
-                    }]]),
+            }, {
+                'type':
+                'RandomChoiceResize',
+                'scales': [(480, 1333), (512, 1333), (544, 1333),
+                           (576, 1333), (608, 1333), (640, 1333),
+                           (672, 1333), (704, 1333), (736, 1333),
+                           (768, 1333), (800, 1333)],
+                'keep_ratio':
+                True
+            }]]),
     dict(
         type='Albu',
         bbox_params=dict(
@@ -300,13 +300,14 @@ train_pipeline = [
 
 test_pipeline = [
     dict(type='LoadImageFromFile', backend_args=backend_args),
-    dict(type='Resize', scale=(800,1333), keep_ratio=True),
+    dict(type='Resize', scale=(800, 1333), keep_ratio=True),
     dict(type='LoadAnnotations', with_bbox=True, with_mask=False),
     dict(
         type='PackDetInputs',
         meta_keys=('img_id', 'img_path', 'ori_shape', 'img_shape',
                    'scale_factor'))
 ]
+
 tta_model = dict(
     type='DetTTAModel',
     tta_cfg=dict(nms=dict(type='nms', iou_threshold=0.6), max_per_img=100))
@@ -339,26 +340,26 @@ tta_pipeline = [
 ]
 
 train_data = dict(
-        type=dataset_type,
-        data_root='/workspace/mmdet/train_tars',
-        ann_file='train.pk',
-        data_prefix=dict(img=''),
-        pipeline=train_pipeline,
-        backend_args=backend_args
+    type=dataset_type,
+    data_root='/workspace/mmdet/train_tars',
+    ann_file='train.pk',
+    data_prefix=dict(img=''),
+    pipeline=train_pipeline,
+    backend_args=backend_args
 )
 
 test_data = dict(
-        type=dataset_type,
-        data_root='/workspace/mmdet/train_tars',
-        ann_file='train.pk',
-        data_prefix=dict(img=''),
-        pipeline=test_pipeline,
-        backend_args=backend_args
+    type=dataset_type,
+    data_root='/workspace/mmdet/train_tars',
+    ann_file='train.pk',
+    data_prefix=dict(img=''),
+    pipeline=test_pipeline,
+    backend_args=backend_args
 )
 
 train_dataset = dict(
     type='ConcatDataset',
-    datasets = [train_data],
+    datasets=[train_data],
 )
 
 train_dataloader = dict(
@@ -425,7 +426,6 @@ optim_wrapper = dict(
 auto_scale_lr = dict(enable=False, base_batch_size=16)
 
 
-
 default_scope = 'mmdet'
 
 default_hooks = dict(
@@ -450,4 +450,4 @@ log_processor = dict(type='LogProcessor', window_size=50, by_epoch=True)
 log_level = 'INFO'
 load_from = 'rcnn_swin.pth'
 resume = None
-work_dir = '/hy58/chenfan/work_dirs_det/bisai'
+work_dir = '/home/tipriest/Documents/AlgorithmPractice/src/deepLearning/DataWhale/mmdet_bisai'
