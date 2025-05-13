@@ -3,6 +3,7 @@
 #include <limits.h>
 #include <math.h>
 #include <unordered_set>
+#include <numeric>
 #include <vector>
 using namespace std;
 struct TreeNode {
@@ -17,31 +18,26 @@ struct TreeNode {
 class Solution {
 public:
   int lengthAfterTransformations(string s, int t) {
-    int n = t+1;
-    vector<vector<int>> dp(26, vector<int>(n, 0));
+    int n = t + 1;
+    vector<int> dp(26, 0);
     int mod = 1e9 + 7;
     for (char ch : s) {
-      dp[ch - 'a'][0]++;
+      dp[ch - 'a']++;
     }
-
     for (int i = 1; i < n; i++) {
-      for (int j = 0; j < 26; j++) {
+      int last_z = dp[25];
+      for (int j = 25; j >= 0; j--) {
         if (j == 0) {
-          dp[0][i] = dp[25][i - 1];
-          continue;
+          dp[j] = last_z;
         } else if (j == 1) {
-          dp[1][i] = (dp[0][i - 1] + dp[25][i - 1]) % mod;
-          continue;
+          dp[j] = (dp[0] + last_z) % mod;
+        } else {
+          dp[j] = dp[j - 1];
         }
-        dp[j][i] = dp[j - 1][i - 1];
       }
     }
-    cout << 1 << endl;
-    int result = 0;
-    for (int i = 0; i < 26; i++) {
-      result = (result + dp[i][n - 1]) % mod;
-    }
-    return result;
+    // cout<<1<<endl;
+    return accumulate(dp.begin(), dp.end(), 0);
   }
 };
 int main() {
