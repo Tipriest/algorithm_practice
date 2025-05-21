@@ -1,9 +1,10 @@
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <limits.h>
 #include <math.h>
-#include <unordered_set>
 #include <numeric>
+#include <unordered_set>
 #include <vector>
 using namespace std;
 struct TreeNode {
@@ -46,4 +47,36 @@ int main() {
   string s = "abcyy";
   int result = solution.lengthAfterTransformations(s, 2);
   std::cout << "result: " << result << std::endl;
+  std::cout << setiosflags(ios::scientific) << "INT32_MAX: " << (float)INT32_MAX
+            << std::endl;
+  std::cout << setiosflags(ios::scientific) << "INT32_MIN: " << (float)INT32_MIN
+            << std::endl;
+  std::cout << setiosflags(ios::scientific) << "INT64_MAX: " << (float)INT64_MAX
+            << setiosflags(ios::scientific) << std::endl;
+  std::cout << setiosflags(ios::scientific) << "INT64_MIN: " << (float)INT64_MIN
+            << std::endl;
+  std::cout << setiosflags(ios::scientific) << "LONG_MAX: " << (float)LONG_MAX
+            << std::endl;
+  std::cout << setiosflags(ios::scientific) << "LONG_MIN: " << (float)LONG_MIN
+            << std::endl;
+  std::cout << setiosflags(ios::scientific)
+            << "LONG_LONG_MAX: " << (float)LONG_LONG_MAX << std::endl;
+  std::cout << setiosflags(ios::scientific)
+            << "LONG_LONG_MIN: " << (float)LONG_LONG_MIN << std::endl;
+  std::cout << setiosflags(ios::scientific)
+            << "FLOAT_MAX: " << std::numeric_limits<float>::max() << std::endl;
+  std::cout << setiosflags(ios::scientific)
+            << "FLOAT_MIN: " << std::numeric_limits<float>::min() << std::endl;
+  std::cout << setiosflags(ios::scientific)
+            << "DOUBLE_MAX: " << std::numeric_limits<double>::max()
+            << std::endl;
+  std::cout << setiosflags(ios::scientific)
+            << "DOUBLE_MIN: " << std::numeric_limits<double>::min()
+            << std::endl;
+  std::cout << setiosflags(ios::scientific)
+            << "DOUBLE_T_MAX: " << std::numeric_limits<double_t>::max()
+            << std::endl;
+  std::cout << setiosflags(ios::scientific)
+            << "DOUBLE_T_MIN: " << std::numeric_limits<double_t>::min()
+            << std::endl;
 }
