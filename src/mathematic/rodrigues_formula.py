@@ -134,5 +134,5 @@ def animate_rodrigues_rotation(_v, _k, _total_theta=np.pi, _frames=100, save_gif
 if __name__ == "__main__":
     # 示例：将向量 v [3, 4, 5] 绕 k轴 [1, 1, 1] 旋转 180°
     v = np.array([3, 4, -5])
-    k = np.array([0.5, 0.5, 0.5])
+    k = np.array([1, 1, 1])
     animate_rodrigues_rotation(v, k, _total_theta=np.pi/180*120, _frames=100, save_gif=True, gif_path="rodrigues_rotation.gif")
