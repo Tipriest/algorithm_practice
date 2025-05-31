@@ -17,7 +17,6 @@ struct TreeNode {
 };
 class Solution {
 public:
-  int dir[4][2] = {1, 0, -1, 0, 0, 1, 0, -1};
   void bfs(vector<vector<char>> &grid, vector<vector<bool>> &visited,
            int startx, int starty) {
     static const int dirs[4][2] = {
@@ -46,22 +45,19 @@ public:
   }
   void dfs(vector<vector<char>> &grid, vector<vector<bool>> &visited, int i,
            int j) {
-    // 处理当前节点，如果当前节点是水或者已经超过了边界，返回
-    if (i < 0 || i >= grid.size() || j < 0 || j > grid[0].size()) {
+    static const int dirs[4][2] = {
+        {1, 0}, {-1, 0}, {0, 1}, {0, -1}}; // 下、上、右、左
+    int m = grid.size(), n = grid[0].size();
+    // 边界和有效性检查
+    if (i < 0 || i >= m || j < 0 || j >= n)
       return;
-    } else if (grid[i][j] == '0') {
+    if (visited[i][j] || grid[i][j] != '1')
       return;
-    }
+
     visited[i][j] = true;
-    for (int n = 0; n < 4; n++) {
-      int nextx = i + dir[n][0];
-      int nexty = j + dir[n][1];
-      if (nextx < 0 || nextx >= grid.size() || nexty < 0 ||
-          nexty >= grid[0].size()) {
-        continue;
-      }else if(visited[nextx][nexty]){
-        continue;
-      }
+    for (int d = 0; d < 4; ++d) {
+      int nextx = i + dirs[d][0];
+      int nexty = j + dirs[d][1];
       dfs(grid, visited, nextx, nexty);
     }
   }
