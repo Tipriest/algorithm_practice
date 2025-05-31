@@ -34,7 +34,7 @@ conda activate algorithmPractice
 ### 安装常用依赖
 
 ```bash
-pip install pyQt5 pymysql requests pymongo scikit-learn matplotlib scipy parsel prettytable pyinstaller d2l==0.17.6 torch numpy kaggle
+pip install pyQt5 pymysql requests pymongo scikit-learn matplotlib scipy parsel prettytable pyinstaller d2l==0.17.6 torch numpy kaggle opencv-python pillow
 ```
 
 如需 C++ 支持，建议使用 g++ 或 clang，推荐 VSCode 作为开发环境。
