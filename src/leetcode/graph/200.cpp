@@ -18,23 +18,25 @@ struct TreeNode {
 class Solution {
 public:
   int dir[4][2] = {1, 0, -1, 0, 0, 1, 0, -1};
-  void bfs(vector<vector<char>> &grid, vector<vector<bool>> &visited, int i,
-           int j) {
+  void bfs(vector<vector<char>> &grid, vector<vector<bool>> &visited,
+           int startx, int starty) {
+    static const int dirs[4][2] = {
+        {1, 0}, {-1, 0}, {0, 1}, {0, -1}}; // 下、上、右、左
+    int m = grid.size(), n = grid[0].size();
     queue<pair<int, int>> que;
-    que.push({i, j});
-    visited[i][j] = true;
+    que.push({startx, starty});
+    visited[startx][starty] = true;
+
     while (!que.empty()) {
-      pair<int, int> cur = que.front();
+      auto [curx, cury] = que.front();
       que.pop();
-      int curx = cur.first;
-      int cury = cur.second;
-      for (int n = 0; n < 4; n++) {
-        int nextx = curx + dir[n][0];
-        int nexty = cury + dir[n][1];
-        if (nextx < 0 || nextx >= grid.size() || nexty < 0 ||
-            nexty >= grid[0].size()) {
+      for (int d = 0; d < 4; ++d) {
+        int nextx = curx + dirs[d][0];
+        int nexty = cury + dirs[d][1];
+        // 边界检查
+        if (nextx < 0 || nextx >= m || nexty < 0 || nexty >= n)
           continue;
-        }
+        // 只访问未访问过的陆地
         if (!visited[nextx][nexty] && grid[nextx][nexty] == '1') {
           que.push({nextx, nexty});
           visited[nextx][nexty] = true;
