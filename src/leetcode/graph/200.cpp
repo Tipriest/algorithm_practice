@@ -42,6 +42,27 @@ public:
       }
     }
   }
+  void dfs(vector<vector<char>> &grid, vector<vector<bool>> &visited, int i,
+           int j) {
+    // 处理当前节点，如果当前节点是水或者已经超过了边界，返回
+    if (i < 0 || i >= grid.size() || j < 0 || j > grid[0].size()) {
+      return;
+    } else if (grid[i][j] == '0') {
+      return;
+    }
+    visited[i][j] = true;
+    for (int n = 0; n < 4; n++) {
+      int nextx = i + dir[n][0];
+      int nexty = j + dir[n][1];
+      if (nextx < 0 || nextx >= grid.size() || nexty < 0 ||
+          nexty >= grid[0].size()) {
+        continue;
+      }else if(visited[nextx][nexty]){
+        continue;
+      }
+      dfs(grid, visited, nextx, nexty);
+    }
+  }
   int numIslands(vector<vector<char>> &grid) {
     int m = grid.size(), n = grid[0].size();
     vector<vector<bool>> visited(m, vector<bool>(n, false));
@@ -50,7 +71,7 @@ public:
       for (int j = 0; j < n; j++) {
         if (grid[i][j] == '1' && visited[i][j] == false) {
           result++;
-          bfs(grid, visited, i, j);
+          dfs(grid, visited, i, j);
         }
       }
     }
