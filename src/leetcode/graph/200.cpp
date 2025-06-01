@@ -38,7 +38,7 @@ public:
         // 只访问未访问过的陆地
         if (!visited[nextx][nexty] && grid[nextx][nexty] == '1') {
           que.push({nextx, nexty});
-          visited[nextx][nexty] = true;
+          visited[nextx][nexty] = true; // 在入队的时候就要标记访问
         }
       }
     }
