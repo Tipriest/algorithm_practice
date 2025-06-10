@@ -8,6 +8,7 @@
       "intelliSenseMode": "gcc-x64",
       "includePath": [
         "/usr/include/c++/11", // 关键路径：GCC 11 的头文件
+        "/usr/include/eigen3",
         "/usr/include/x86_64-linux-gnu/c++/11",
         "${workspaceFolder}/**"
       ]
