@@ -77,6 +77,12 @@
     "compare": "cpp",
     "concepts": "cpp",
     "ranges": "cpp",
-    "stop_token": "cpp"
+    "stop_token": "cpp",
+    "queue": "cpp",
+    "span": "cpp",
+    "stack": "cpp",
+    "xhash": "cpp",
+    "xstring": "cpp",
+    "xutility": "cpp"
   }
 }
