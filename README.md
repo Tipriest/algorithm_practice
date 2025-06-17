@@ -6,8 +6,9 @@
 
 ## 目录结构
 
+- `.vscode/`、`.idea/`：IDE 配置文件
+- `leetcode/`：LeetCode 算法题解与每日一题
 - `src/`
-  - `leetcode/`：LeetCode 算法题解与每日一题
   - `mathematic/`：数学相关算法与可视化（如罗德里格斯公式动图演示）
   - `deepLearning/`：深度学习相关代码与实验
   - `pythonBasic/`：Python 基础、标准库、文件处理、GUI、数据库等
@@ -16,7 +17,7 @@
 
 - `build/`、`cmake-build-debug/`：C++ 项目构建目录
 - `CMakeLists.txt`：C++ 项目构建配置
-- `.vscode/`、`.idea/`：IDE 配置文件
+
 
 ---
 
