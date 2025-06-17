@@ -6,7 +6,7 @@ class Solution:
       max_v : int = 0
       min_v : int = 0
       max_conv: str = '-1'
-      min_conv:str  = '-1'
+      min_conv:str  = '-1'  
       min_to:str
       for index, ch in enumerate(num_l):
         if ch != '9':
