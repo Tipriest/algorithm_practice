@@ -33,7 +33,7 @@ public:
     }
     for (int i = 1; i < m; i++) {
       for (int j = 1; j < n + 1; j++) {
-        
+        if (j < nums[i]) {
           dp[i][j] = dp[i - 1][j];
           continue;
         } else {
