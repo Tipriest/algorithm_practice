@@ -27,46 +27,28 @@ struct ListNode {
 };
 class Solution {
 public:
-  bool checkRegion(const vector<vector<int>> &points, int l, int r) {
-    int n = points.size();
-    int lx = points[l][0], ly = points[l][1], rx = points[r][0],
-        ry = points[r][1];
-    // 组成的是一个点
-    if (lx == rx && ly == ry) {
-      return false;
-    }
-    if (lx == rx || ly == ry) {
-      return true;
-    }
-    if (((lx - rx) / abs(lx - rx)) * ((ly - ry) / abs(ly - ry)) < 0) {
-      return true;
-    }
-    return false;
-  }
   bool checkAABB(const vector<vector<int>> &points, int l, int r) {
-    int n = points.size();
-    int lx = min(points[l][0], points[r][0]),
-        rx = max(points[l][0], points[r][0]);
-    int ly = max(points[l][1], points[r][1]),
-        ry = min(points[l][1], points[r][1]);
-    for (int i = 0; i < n; i++) {
-      if (i == l || i == r) {
-        continue;
-      }
-      int _tx = points[i][0], _ty = points[i][1];
-      if (_tx >= lx && _tx <= rx && _ty <= ly && _ty >= ry) {
+    int ly = points[l][1], ry = points[r][1];
+    for (int i = l + 1; i < r; i++) {
+      int _ty = points[i][1];
+      if (_ty <= ly && _ty >= ry) {
         return false;
       }
     }
     return true;
   }
   int numberOfPairs(vector<vector<int>> &points) {
+    ranges::sort(points, {}, [](auto &p) { return pair(p[0], -p[1]); });
     int n = points.size();
     int res = 0;
     for (int l = 0; l < n - 1; l++) {
       for (int r = l + 1; r < n; r++) {
-        if (checkRegion(points, l, r) && checkAABB(points, l, r)) {
-          res++;
+        if (points[l][1] - points[r][1] < 0) {
+          continue;
+        } else {
+          if (checkAABB(points, l, r)) {
+            res++;
+          }
         }
       }
     }
@@ -76,7 +58,7 @@ public:
 int main() {
   // 示例二叉树
   Solution solution;
-  vector<vector<int>> points = {{3, 1}, {1, 3}, {1, 1}};
+  vector<vector<int>> points = {{6, 2}, {4, 4}, {2, 6}};
   int result = solution.numberOfPairs(points);
   std::cout << "result: " << result << std::endl;
 }
