@@ -36,4 +36,5 @@ int main() {
    vector<int> nums = {7, 1, 5, 3, 6, 4};
    int result = solution.sumBase(1, 1);
    std::cout << "result: " << result << std::endl;
+   return 0;
 }
