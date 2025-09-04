@@ -1,7 +1,0 @@
-
-path: /home/tipriest/data/seg_risky/dataset
-train: train
-val: valid
-
-names:
-    0: alter

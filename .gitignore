@@ -1,6 +1,12 @@
+* 
+!*/
+!*.*
+
+
 build/
 .history/*
 __pycache__
 runs/
 *.pth
 *.pt
+*.exe
