@@ -84,6 +84,7 @@
     "xhash": "cpp",
     "xstring": "cpp",
     "xutility": "cpp",
-    "numbers": "cpp"
+    "numbers": "cpp",
+    "semaphore": "cpp"
   }
 }
