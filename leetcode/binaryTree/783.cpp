@@ -57,7 +57,7 @@ int main() {
   root->left->right = new TreeNode(1);
   root->right = new TreeNode(1);
   root->right->right = new TreeNode(1);
-  bool result = solution.isUnivalTree(root);
+  bool result = solution.minDiffInBST(root);
   std::cout << "result: " << result << std::endl;
   return 0;
 }
