@@ -66,7 +66,7 @@ int main() {
   root->left->right = new TreeNode(1);
   root->right = new TreeNode(1);
   root->right->right = new TreeNode(1);
-  TreeNode *result = solution.increasingBST(root);
+  TreeNode *result = solution.convertBiNode(root);
   // std::cout << "result: " << result << std::endl;
   return 0;
 }
