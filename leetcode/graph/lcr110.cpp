@@ -42,10 +42,28 @@ public:
     }
     return;
   }
-  void bfs(vector<vector<int>> &graph, int cur, int n) {}
+  void bfs(vector<vector<int>> &graph, int cur, int n) {
+    // 队列存储 pair<当前节点, 当前路径>
+    queue<pair<int, vector<int>>> qu;
+    qu.push({cur, {cur}});
+    while (!qu.empty()) {
+      auto [node, curPath] = qu.front();
+      qu.pop();
+      if (node == n) {
+        paths.push_back(curPath);
+        continue;
+      }
+      for (int nextp : graph[node]) {
+        vector<int> nextPath = curPath;
+        nextPath.push_back(nextp);
+        qu.push({nextp, nextPath});
+      }
+    }
+  }
   vector<vector<int>> allPathsSourceTarget(vector<vector<int>> &graph) {
     int n = graph.size();
-    dfs(graph, 0, n-1);
+    // dfs(graph, 0, n - 1);
+    bfs(graph, 0, n - 1);
     return paths;
   }
 };
