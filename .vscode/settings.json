@@ -83,6 +83,8 @@
     "stack": "cpp",
     "xhash": "cpp",
     "xstring": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "numbers": "cpp",
+    "semaphore": "cpp"
   }
 }
