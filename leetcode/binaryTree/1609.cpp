@@ -28,7 +28,7 @@ struct ListNode {
 // 优化建议，改一个queue试一试
 class Solution {
 public:
-  bool dfs(vector<TreeNode *> &nodes, bool even) {
+  bool dfs(const vector<TreeNode *> &nodes, bool even) {
     if (0 == nodes.size()) {
       return true;
     }
@@ -42,18 +42,22 @@ public:
       if (node->right) {
         next_nodes.push_back(node->right);
       }
-      if (even && 1 != node->val % 2) {
-        return false;
-      } else if (!even && 0 != node->val % 2) {
-        return false;
-      }
-      if (even && node->val <= last_val) {
-        return false;
-      } else if (!even && node->val >= last_val) {
-        return false;
+      if (even) {
+        if (1 != node->val % 2) {
+          return false;
+        }
+        if (node->val <= last_val) {
+          return false;
+        }
       } else {
-        last_val = node->val;
+        if (0 != node->val % 2) {
+          return false;
+        }
+        if (node->val >= last_val) {
+          return false;
+        }
       }
+      last_val = node->val;
     }
     return dfs(next_nodes, !even);
   }
