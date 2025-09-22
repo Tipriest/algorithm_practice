@@ -21,16 +21,16 @@ struct Pack {
   }
 };
 
-// struct PackHash {
-//   std::size_t operator()(const Pack &pack) const {
-//     std::size_t h1 = std::hash<int>{}(pack.source);
-//     std::size_t h2 = std::hash<int>{}(pack.destination);
-//     std::size_t h3 = std::hash<int>{}(pack.timestamp);
+struct PackHash {
+  std::size_t operator()(const Pack &pack) const {
+    std::size_t h1 = std::hash<int>{}(pack.source);
+    std::size_t h2 = std::hash<int>{}(pack.destination);
+    std::size_t h3 = std::hash<int>{}(pack.timestamp);
 
-//     // 组合hash values
-//     return h1 ^ (h2 << 1) ^ (h3 << 2);
-//   }
-// };
+    // 组合hash values
+    return h1 ^ (h2 << 1) ^ (h3 << 2);
+  }
+};
 struct PackHash2 {
   template <typename T> static void hash_combine(size_t &seed, const T &v) {
     // 参考boost::hash_combine
