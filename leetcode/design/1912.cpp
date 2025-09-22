@@ -38,43 +38,31 @@ struct entryClass {
     }
     return movie < other.movie;
   }
-  bool operator>(const entryClass &other) const { return !operator<(other); }
   bool operator==(const entryClass &other) const {
-    return shop == other.shop && movie == other.movie;
-  }
-};
-struct entryClassHash {
-  std::size_t operator()(const entryClass &entry) const {
-    std::size_t h1 = std::hash<int>{}(entry.shop);
-    std::size_t h2 = std::hash<int>{}(entry.movie);
-    std::size_t h3 = std::hash<int>{}(entry.price);
-
-    // 组合hash values
-    return h1 ^ (h2 << 1) ^ (h3 << 2);
+    return movie == other.movie;
   }
 };
 class MovieRentingSystem {
 public:
   MovieRentingSystem(int n, vector<vector<int>> &entries) {
     for (vector<int> entry : entries) {
-      umap1[entry[0]].insert(entryClass(entry[0], entry[1], entry[2]));
-      umap2[entry[1]].insert(entryClass(entry[0], entry[1], entry[2]));
-      umap3[pair(entry[0], entry[1])] = entry[2];
+      umap1[entry[1]].insert(entryClass(entry[0], entry[1], entry[2]));
+      umap2[pair(entry[0], entry[1])] = entry[2];
     }
   }
   void rent(int shop, int movie) {
-    pset.insert(entryClass(shop, movie, umap3[pair(shop, movie)]));
+    pset.insert(entryClass(shop, movie, umap2[pair(shop, movie)]));
   }
   void drop(int shop, int movie) {
-    pset.erase(entryClass(shop, movie, umap3[pair(shop, movie)]));
+    pset.erase(entryClass(shop, movie, umap2[pair(shop, movie)]));
   }
 
   vector<int> search(int movie) {
     vector<int> res;
-    for (auto it : umap2[movie]) {
+    for (auto it : umap1[movie]) {
       // 已经借出的情况
       if (pset.count(entryClass(it.shop, it.movie,
-                                umap3[pair<int, int>(it.shop, it.movie)]))) {
+                                umap2[pair<int, int>(it.shop, it.movie)]))) {
         continue;
       } else { //还没有借出的情况
         res.push_back(it.shop);
@@ -99,12 +87,10 @@ public:
   }
 
 private:
-  // 每个商店有的电影set
-  unordered_map<int, set<entryClass>> umap1;
   // 有指定电影的商店set
-  unordered_map<int, set<entryClass>> umap2;
+  unordered_map<int, set<entryClass>> umap1;
   // 保存指定商店和电影的价格
-  unordered_map<pair<int, int>, int, hash_pair> umap3;
+  unordered_map<pair<int, int>, int, hash_pair> umap2;
   // 已经借出的电影的pset
   set<entryClass> pset;
 };
