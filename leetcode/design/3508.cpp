@@ -21,22 +21,22 @@ struct Pack {
   }
 };
 
-struct PackHash {
-  std::size_t operator()(const Pack &pack) const {
-    std::size_t h1 = std::hash<int>{}(pack.source);
-    std::size_t h2 = std::hash<int>{}(pack.destination);
-    std::size_t h3 = std::hash<int>{}(pack.timestamp);
+// struct PackHash {
+//   std::size_t operator()(const Pack &pack) const {
+//     std::size_t h1 = std::hash<int>{}(pack.source);
+//     std::size_t h2 = std::hash<int>{}(pack.destination);
+//     std::size_t h3 = std::hash<int>{}(pack.timestamp);
 
-    // 组合hash values
-    return h1 ^ (h2 << 1) ^ (h3 << 2);
-  }
-};
+//     // 组合hash values
+//     return h1 ^ (h2 << 1) ^ (h3 << 2);
+//   }
+// };
 struct PackHash2 {
   template <typename T> static void hash_combine(size_t &seed, const T &v) {
     // 参考boost::hash_combine
     seed ^= hash<T>{}(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
   }
-  std::size_t operator()(const Pack &pack) const { 
+  std::size_t operator()(const Pack &pack) const {
     size_t seed = 0;
     hash_combine(seed, pack.timestamp);
     hash_combine(seed, pack.source);
@@ -45,15 +45,15 @@ struct PackHash2 {
     return seed;
   }
 };
-void printPackQueue(queue<Pack> pque) {
-  while (!pque.empty()) {
-    cout << "timestamp: " << pque.front().timestamp
-         << "source: " << pque.front().source
-         << "destination: " << pque.front().destination << endl;
-    pque.pop();
-  }
-  cout << endl;
-}
+// void printPackQueue(queue<Pack> pque) {
+//   while (!pque.empty()) {
+//     cout << "timestamp: " << pque.front().timestamp
+//          << "source: " << pque.front().source
+//          << "destination: " << pque.front().destination << endl;
+//     pque.pop();
+//   }
+//   cout << endl;
+// }
 class Router {
 public:
   Router(int memoryLimit) { this->memory_limit = memoryLimit; }
@@ -61,7 +61,7 @@ public:
   bool addPacket(int source, int destination, int timestamp) {
     // 用uset判断是不是重合的
     Pack p = Pack(source, destination, timestamp);
-    if (uset.find(p) != uset.end()) {
+    if (!uset.insert(p).second) {
       return false;
     }
 
@@ -72,13 +72,12 @@ public:
       forwardPacket();
     }
     que.push(p);
-    uset.insert(p);
     umap[p.destination].push_back(p);
     return true;
   }
 
   vector<int> forwardPacket() {
-    if (0 == que.size()) {
+    if (que.empty()) {
       return {};
     }
     Pack p = que.front();
@@ -94,7 +93,7 @@ public:
       int mid = (l + r) / 2;
       if (packs[mid].timestamp < startTime) {
         l = mid + 1;
-      }else if (packs[mid].timestamp >= startTime) {
+      } else if (packs[mid].timestamp >= startTime) {
         if (0 == mid) {
           return 0;
         } else {
@@ -116,7 +115,7 @@ public:
       int mid = (l + r) / 2;
       if (packs[mid].timestamp > endTime) {
         r = mid - 1;
-      }else if (packs[mid].timestamp <= endTime) {
+      } else if (packs[mid].timestamp <= endTime) {
         if (packs.size() - 1 == mid) {
           return mid;
         } else {
@@ -139,21 +138,23 @@ public:
       return 0;
     }
     return r - l + 1;
+    
   }
 
   int memory_limit = 0;
   queue<Pack> que;
   unordered_set<Pack, PackHash2> uset;
   unordered_map<int, deque<Pack>> umap;
+  
 };
 int main() {
   // 示例二叉树
   Router *obj = new Router(4);
   obj->addPacket(4, 2, 1);
-  printPackQueue(obj->que);
+  // printPackQueue(obj->que);
   obj->addPacket(3, 2, 1);
-  printPackQueue(obj->que);
+  // printPackQueue(obj->que);
   obj->getCount(2, 1, 1);
-  printPackQueue(obj->que);
+  // printPackQueue(obj->que);
   return 0;
 }
