@@ -27,24 +27,33 @@ struct ListNode {
 };
 class Solution {
 public:
-  int bt(int filled, int empty, int numExchange) {
-    // 现在所有的瓶子也不能再兑换水了
-    if (filled + empty < numExchange) {
-      return filled;
+  int maxArea(vector<int> &heights) {
+    int l = 0, r = heights.size() - 1;
+    int res = min(heights[l], heights[r]) * (r - l);
+    while (l < r) {
+      int h = min(heights[l], heights[r]);
+      if (heights[l] < heights[r]) {
+        while (l < r && heights[l] <= h) {
+          l++;
+        }
+      } else {
+        while (l < r && heights[r] <= h) {
+          r--;
+        }
+      }
+      if(l >= r){
+        break;
+      }
+      res = max(res, min(heights[l], heights[r]) * (r - l));
     }
-    // 兑换一瓶水并且喝掉
-    return 1 + filled +
-           bt(0, filled + empty - numExchange + 1, numExchange + 1);
-  }
-  int maxBottlesDrunk(int numBottles, int numExchange) {
-    return bt(numBottles, 0, numExchange);
+    return res;
   }
 };
 int main() {
   // 示例二叉树
   Solution solution;
-  vector<int> nums = {7, 1, 5, 3, 6, 4};
-  int result = solution.maxBottlesDrunk(10, 3);
+  vector<int> nums = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+  int result = solution.maxArea(nums);
   std::cout << "result: " << result << std::endl;
   return 0;
 }
