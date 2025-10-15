@@ -58,7 +58,7 @@ int main() {
   // 示例二叉树
   Solution solution;
   vector<int> nums = {2, 5, 7, 8, 9, 2, 3, 4, 3, 1};
-  int result = solution.hasIncreasingSubarrays(nums);
+  int result = solution.maxIncreasingSubarrays(nums);
   std::cout << "max_k: " << result << std::endl;
   return 0;
 }
