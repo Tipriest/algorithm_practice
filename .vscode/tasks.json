@@ -36,6 +36,7 @@
         "-DPINOCCHIO_ENABLE_TEMPLATE_INSTANTIATION",
         "-I/opt/openrobots/lib/pkgconfig/../../include",
         "-I/opt/openrobots/include",
+        "-I/usr/local/include/eigen3",
         "-I/usr/include/eigen3",
         "-L/opt/openrobots/lib/pkgconfig/../../lib",
         "-L/opt/openrobots/lib",
