@@ -8,7 +8,9 @@
 // PINOCCHIO_MODEL_DIR is defined by the CMake but you can define your own
 // directory here.
 #ifndef PINOCCHIO_MODEL_DIR
-#define PINOCCHIO_MODEL_DIR "../model/go1l2_description/urdf/"
+#define PINOCCHIO_MODEL_DIR                                                    \
+  "/home/tipriest/Documents/algorithm_practice/cpplibs/pinocchio/model/"       \
+  "go1l2_description/urdf/"
 #endif
 
 int main(int argc, char **argv) {
@@ -17,9 +19,7 @@ int main(int argc, char **argv) {
   // You should change here to set up your own URDF file or just pass it as an
   // argument of this example.
   const std::string urdf_filename =
-      (argc <= 1) ? PINOCCHIO_MODEL_DIR +
-                        std::string("robot.urdf")
-                  : argv[1];
+      PINOCCHIO_MODEL_DIR + std::string("robot.urdf");
 
   // Load the urdf model
   Model model;
