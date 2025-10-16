@@ -1,11 +1,10 @@
 #include <algorithm>
 #include <iostream>
+#include <limits.h>
+#include <math.h>
 #include <unordered_set>
 #include <vector>
-#include <math.h>
-#include <limits.h>
 using namespace std;
-
 
 class Solution {
 public:
@@ -33,7 +32,7 @@ public:
         }
         if (dp[i][j] > max_num) {
           max_num = dp[i][j];
-          max_str = s.substr(i-1, max_num);
+          max_str = s.substr(i - 1, max_num);
         }
       }
     }
@@ -42,9 +41,9 @@ public:
 };
 
 int main() {
-    // 示例二叉树
-    Solution solution;
-    string word1 = "babad";
-    string result = solution.longestPalindrome(word1);
-    std::cout << "result: " << result << std::endl;
+  // 示例二叉树
+  Solution solution;
+  string word1 = "babad";
+  string result = solution.longestPalindrome(word1);
+  std::cout << "result: " << result << std::endl;
 }
