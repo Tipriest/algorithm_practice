@@ -1,7 +1,12 @@
+/**
+ * @file main.cpp
+ * @brief 计算机器人动力学的简单程序
+ * @date 2025-10-16
+ */
 #include "pinocchio/algorithm/joint-configuration.hpp"
-#include "pinocchio/algorithm/rnea.hpp"
-#include "pinocchio/multibody/sample-models.hpp"
 #include <iostream>
+#include <pinocchio/algorithm/rnea.hpp>
+#include <pinocchio/multibody/sample-models.hpp>
 
 int main() {
   pinocchio::Model model;
