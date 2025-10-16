@@ -9,8 +9,8 @@
 // directory here.
 #ifndef PINOCCHIO_MODEL_DIR
 #define PINOCCHIO_MODEL_DIR                                                    \
-  "/home/tipriest/Documents/algorithm_practice/cpplibs/pinocchio/model/"      \
-  "go1l2_description/urdf/"
+  "/home/tipriest/Documents/algorithm_practice/cpplibs/pinocchio/model/"       \
+  "robots/"
 #endif
 
 int main(int argc, char **argv) {
@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
   // You should change here to set up your own URDF file or just pass it as an
   // argument of this example.
   const std::string urdf_filename =
-       PINOCCHIO_MODEL_DIR + std::string("robot.urdf");
+      PINOCCHIO_MODEL_DIR + std::string("go1l2_description/urdf/robot.urdf");
 
   // Load the urdf model
   Model model;
