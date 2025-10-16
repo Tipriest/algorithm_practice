@@ -10,3 +10,4 @@ runs/
 *.pth
 *.pt
 *.exe
+.vscode/

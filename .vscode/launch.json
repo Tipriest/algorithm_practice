@@ -5,7 +5,7 @@
             "name": "C/C++",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "program": "../cpplibs/pinocchio/build/pinocchio_learn",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
