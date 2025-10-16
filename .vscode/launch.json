@@ -12,7 +12,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
-      "preLaunchTask": "compile_with_pinocchio",
+      "preLaunchTask": "compile",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
