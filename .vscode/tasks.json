@@ -56,6 +56,12 @@
         "-lcasadi",
         "-o",
         "${fileDirname}/${fileBasenameNoExtension}",
+        // fcl related
+        "-lfcl",
+        "-lccd",
+        "-lm",
+        "-loctomap",
+        "-loctomath",
       ],
       "problemMatcher": {
         "owner": "cpp",
