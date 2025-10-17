@@ -54,6 +54,12 @@ leetcode使用的都是C++和Python的标准库，因此不需要额外的配置
 
 
 ### Pinocchio Related
+  1. install Pinocchio, refer to this [doc](https://stack-of-tasks.github.io/pinocchio/download.html)
+  2. install robot model, refer to this [doc](https://github.com/Gepetto/example-robot-data/tree/6ed0cc91241562972190da6e69430834ae2b1158).in fact, just use the command below:
+```bash
+sudo apt install robotpkg-py3\*-example-robot-data
+
+```
   Pinocchio库的`compile and debug`需要链接很多库，因此单独在`tasks.json`中定义Pinocchio库的编译方法
   练习相关代码的编译方式，如果需要运行该部分代码，请将`launch.json`文件中的`preLaunchTask`一项更改如下所示:
   ```

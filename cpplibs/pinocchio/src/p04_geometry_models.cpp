@@ -10,17 +10,16 @@
 // PINOCCHIO_MODEL_DIR is defined by the CMake but you can define your own
 // directory here.
 #ifndef PINOCCHIO_MODEL_DIR
-#define PINOCCHIO_MODEL_DIR                                                    \
-  "/home/tipriest/Documents/algorithm_practice/cpplibs/pinocchio"
+#define PINOCCHIO_MODEL_DIR "/opt/openrobots/share"
 #endif
 
 int main(int argc, char **argv) {
   using namespace pinocchio;
 
   const std::string model_path =
-      (argc <= 1) ? PINOCCHIO_MODEL_DIR +
-                        std::string("/model/robots")
-                  : argv[1];
+      (argc <= 1)
+          ? PINOCCHIO_MODEL_DIR + std::string("/example-robot-data/robots")
+          : argv[1];
   const std::string mesh_dir = (argc <= 1) ? PINOCCHIO_MODEL_DIR : argv[1];
   const std::string urdf_filename =
       model_path + "/ur_description/urdf/ur5_robot.urdf";

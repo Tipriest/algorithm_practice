@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_BUILD_TYPE Debug)
 
+add_compile_definitions(PINOCCHIO_MODEL_DIR=\"/opt/openrobots/share\")
+
 file(GLOB_RECURSE SRCS ${PROJECT_SOURCE_DIR}/src/p04_geometry_models.cpp)
 
 # 查找 Pinocchio

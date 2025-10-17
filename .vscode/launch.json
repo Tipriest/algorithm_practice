@@ -6,7 +6,7 @@
       "request": "launch",
       "name": "C/C++",
       "program": "${fileDirname}/${fileBasenameNoExtension}",
-      "args": ["-I /opt/openrobots/include"],
+      "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
