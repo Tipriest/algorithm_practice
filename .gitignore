@@ -4,6 +4,8 @@
 
 
 build/
+devel/
+.catkin_tools/
 .history/*
 __pycache__
 runs/
