@@ -1,3 +1,25 @@
+/**
+ * @file p04_geometry_models.cpp
+ * @brief
+ * 这个代码目前没办法直接通过F5进行一键编译&调试，因为直接使用F5键带有preLaunchTask的话，
+ * 是需要调用tasks.json中的compile_with_pinocchio方法使用g++进行编译的，
+ * 但是使用g++编译需要自己手动指定过程的-I -L
+ * -l等编译参数，目前直接编译会出现一个与urdf解析
+ * 相关的函数链接不到的问题，我推测是与hpp-fcl改名为coal有关的一个问题，
+ * 但是尝试了一些办法还没有解决
+ * 虽然使用g++编译有问题，但是使用CMake的方法是没有问题的，因此可以使用CMake生成可执行文件后，
+ * 放置在该源文件路径下使用F5进行调试(需要按照launch.json文件中的说明将preLaunchTask注释掉)，
+ * 然后就可以正常进行调试了
+ * @date 2025-10-17
+ *
+ * @copyright Copyright (C) 2025, Tipriest, all rights reserved.
+ *
+ * @par 修改日志:
+ * <table>
+ * <tr><th>Date       <th>Author  <th>Description
+ * <tr><td>2025-10-17 <td>Tipriest  <td>
+ * </table>
+ */
 #include "pinocchio/multibody/fcl.hpp"
 #include "pinocchio/parsers/urdf.hpp"
 

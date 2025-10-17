@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_N pinocchio_learn)
+set(PROJECT_N p05_collision_detection)
 project(${PROJECT_N} VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -9,7 +9,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 add_compile_definitions(PINOCCHIO_MODEL_DIR=\"/opt/openrobots/share\")
 
-file(GLOB_RECURSE SRCS ${PROJECT_SOURCE_DIR}/src/p04_geometry_models.cpp)
+file(GLOB_RECURSE SRCS ${PROJECT_SOURCE_DIR}/src/${PROJECT_N}.cpp)
 
 # 查找 Pinocchio
 find_package(pinocchio REQUIRED)

@@ -12,6 +12,9 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
+      // 打开下面的这个选项，可以编译cpp文件并运行，注释掉下面的选项，会直接寻找当前文件夹
+      // 下和cpp同名但是没有后缀的可执行文件进行执行，因此需要先试用CMake或者g++等方式编译出
+      // 可以执行或者调试的二进制文件，并且放到该文件同名的目录下即可
       "preLaunchTask": "compile",
       "setupCommands": [
         {
