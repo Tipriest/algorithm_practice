@@ -69,4 +69,16 @@ int main(int argc, char **argv) {
     std::cout << std::setw(24) << std::left << model.names[joint_id] << ": "
               << std::fixed << std::setprecision(2)
               << data.oMi[joint_id].translation().transpose() << std::endl;
+
+  // 6. 打印每个连杆的位置
+  // 遍历模型中的所有关节。
+  for (JointIndex joint_id = 0; joint_id < (JointIndex)model.njoints;
+       ++joint_id)
+    // 打印关节的名称和其在世界坐标系下的位置（平移向量）。
+    // `data.oMi[joint_id]` 存储了第 `joint_id`
+    // 个关节坐标系相对于世界坐标系（origin）的变换矩阵（SE3类型）。
+    // `.translation()` 获取该变换的平移部分。
+    std::cout << std::setw(24) << std::left << model.names[joint_id] << ": "
+              << std::fixed << std::setprecision(2)
+              << data.oMi[joint_id].translation().transpose() << std::endl;
 }
