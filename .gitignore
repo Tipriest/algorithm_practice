@@ -4,9 +4,12 @@
 
 
 build/
+devel/
+.catkin_tools/
 .history/*
 __pycache__
 runs/
 *.pth
 *.pt
 *.exe
+.vscode/

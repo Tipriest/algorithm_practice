@@ -5,62 +5,77 @@
 ---
 
 ## 目录结构
-
-- `.vscode/`、`.idea/`：IDE 配置文件
-- `leetcode/`：LeetCode 算法题解与每日一题
-- `src/`
-  - `mathematic/`：数学相关算法与可视化（如罗德里格斯公式动图演示）
-  - `deepLearning/`：深度学习相关代码与实验
-  - `pythonBasic/`：Python 基础、标准库、文件处理、GUI、数据库等
-  - `designPattern/`：设计模式相关代码
-  - 其他专题文件夹
-
-- `build/`、`cmake-build-debug/`：C++ 项目构建目录
-- `CMakeLists.txt`：C++ 项目构建配置
+├── .vscode  
+├── cpplibs  
+│   ├── eigen  
+│   ├── exception  
+│   ├── pinocchio  
+│   └── time  
+├── cpptest  
+│   ├── nan  
+│   └── nan.cpp  
+├── designPattern  
+├── leetcode  
+│   ├── arrayAndmatrix  
+│   ├── backTracking  
+│   ├── binaryOperation  
+│   ├── binaryTree  
+│   ├── design  
+│   ├── dynamicPlanning  
+│   ├── enum  
+│   ├── everyDayLeetcode  
+│   ├── geometry  
+│   ├── graph  
+│   ├── greedy  
+│   ├── hashMap  
+│   ├── linkedList  
+│   ├── math  
+│   ├── prefixSum  
+│   ├── priorityQueue  
+│   ├── recursive  
+│   ├── segmentTree  
+│   ├── simulation  
+│   ├── slidingWindow  
+│   ├── sort  
+│   ├── stackAndQueue  
+│   ├── string  
+│   ├── template.cpp  
+│   ├── template.py  
+│   ├── test  
+│   ├── twoPointers  
+│   └── weekComp  
+├── README.md  
 
 
 ---
 
-## 环境配置
+## 环境配置与运行说明
+leetcode使用的都是C++和Python的标准库，因此不需要额外的配置，因为已经配置好了`launch.json`文件，因此直接使用`F5`进行debug或者使用`Ctrl`+`F5`进行运行即可，在cpplib中对于一些库的练习可能需要使用者进行额外的安装
 
-建议使用 [Anaconda](https://www.anaconda.com/) 或 Miniconda 管理 Python 环境。
 
-### 创建并激活环境
-
+### Pinocchio Related
+  1. install Pinocchio, refer to this [doc](https://stack-of-tasks.github.io/pinocchio/download.html)
+  2. install robot model, refer to this [doc](https://github.com/Gepetto/example-robot-data/tree/6ed0cc91241562972190da6e69430834ae2b1158).in fact, just use the command below:
 ```bash
-conda create -n algorithmPractice python=3.8 -y
-conda activate algorithmPractice
-```
+sudo apt install robotpkg-py3\*-example-robot-data
 
-### 安装常用依赖
-
-```bash
-pip install pyQt5 pymysql requests pymongo scikit-learn matplotlib scipy parsel prettytable pyinstaller d2l==0.17.6 torch numpy kaggle opencv-python pillow
 ```
+  Pinocchio库的`compile and debug`需要链接很多库，因此单独在`tasks.json`中定义Pinocchio库的编译方法
+  练习相关代码的编译方式，如果需要运行该部分代码，请将`launch.json`文件中的`preLaunchTask`一项更改如下所示:
+  ```
+  "preLaunchTask": "compile_with_pinocchio",
+  ```
 
 如需 C++ 支持，建议使用 g++ 或 clang，推荐 VSCode 作为开发环境。
 
 ---
 
-## 运行说明
-
-- **C++ 项目**：可用 VSCode 的任务或 CMake 构建，或直接用 g++ 编译。
-- **Python 项目**：直接运行 `.py` 文件或 Jupyter Notebook。
-- **可视化/动图**：如 `rodrigues_formula.py`，运行后会弹出 3D 动画窗口并可保存 GIF。
-
----
-
-## 常用快捷键（VSCode）
-
-- `Ctrl + Alt + N`：编译并运行（需 Code Runner 插件）
-- `Ctrl + Shift + B`：调用配置好的 g++ 任务编译 C++ 程序
-
----
 
 ## 参考与致谢
 
 - [知乎：VSCode 配置 C++ 环境](https://zhuanlan.zhihu.com/p/80659895)
 - [d2l.ai 动手学深度学习](https://zh.d2l.ai/)
+- [VScode权威指南](https://weread.qq.com/web/reader/7bc32db071f02f257bc2a8a)
 
 ---
 
