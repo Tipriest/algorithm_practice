@@ -29,6 +29,8 @@ dependencies:
   - seaborn
   - plotly
   - opencv
+  # https://viser.studio/main/
+  - viser
 
   # 机器人学相关
   - meshcat-python
