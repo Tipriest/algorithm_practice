@@ -1,0 +1,53 @@
+name: algo_practice
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+
+  # 科学计算基础库
+  - numpy>=1.23.0
+  - scipy>=1.9.0
+  - matplotlib>=3.5.0
+  - pandas>=1.4.0
+
+  # 机器学习框架
+  # - pytorch>=2.0.0
+  # - torchvision
+  # - torchaudio
+  # - scikit-learn>=1.1.0
+  # - tensorboard
+
+  # 深度学习辅助工具
+  - jupyter
+  - jupyterlab
+  - ipython
+  - notebook
+
+  # 可视化工具
+  - seaborn
+  - plotly
+  - opencv
+
+  # 机器人学相关
+  - meshcat-python
+  - pybullet
+
+  # 其他工具
+  - tqdm
+  - pytest
+  - black
+  - flake8
+
+  # pip安装的包
+  - pip:
+      # - d2l==1.0.3
+      # - gymnasium
+      # - stable-baselines3
+      # - roboticstoolbox-python
+      # - spatialmath-python
+      # - trimesh
+      # - open3d
+      # - mujoco
+      # - dm-control
