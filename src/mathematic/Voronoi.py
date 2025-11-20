@@ -1,8 +1,10 @@
 import numpy as np
 import matplotlib as mpl
+
 mpl.get_cachedir()
 import matplotlib.pyplot as plt
 from scipy.spatial import Voronoi, voronoi_plot_2d
+
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
 
@@ -20,7 +22,11 @@ voronoi_plot_2d(
 
 # 绘制障碍物点
 ax.plot(
-    points[:, 0], points[:, 1], "ko", markersize=8, label="generated point(obstacle center)"
+    points[:, 0],
+    points[:, 1],
+    "ko",
+    markersize=8,
+    label="generated point(obstacle center)",
 )
 
 # # 模拟路径搜索的结果（在骨架上选一条路径）

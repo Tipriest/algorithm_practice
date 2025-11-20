@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+# from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import animation
+
 
 def rodrigues_rotate(_v, _k, theta):
     """
@@ -22,8 +23,15 @@ def rodrigues_rotate(_v, _k, theta):
     )
     return v_rot
 
-def animate_rodrigues_rotation(_v, _k, _total_theta=np.pi, _frames=100, save_gif=True, 
-                               gif_path="rodrigues_rotation.gif"):
+
+def animate_rodrigues_rotation(
+    _v,
+    _k,
+    _total_theta=np.pi,
+    _frames=100,
+    save_gif=True,
+    gif_path="rodrigues_rotation.gif",
+):
     """
     绘制向量v绕轴k旋转的动图，并保存为gif
     :param v: 初始向量
@@ -118,21 +126,29 @@ def animate_rodrigues_rotation(_v, _k, _total_theta=np.pi, _frames=100, save_gif
             length=1.0,
             linewidth=2,
         )
-        return quivers[0],
+        return (quivers[0],)
 
     # 5秒，interval=50ms，则frames=100
     ani = animation.FuncAnimation(
-        fig, update, frames=_frames, interval=5000//_frames, blit=True
+        fig, update, frames=_frames, interval=5000 // _frames, blit=True
     )
 
     if save_gif:
-        ani.save(gif_path, writer='pillow', fps=_frames//5)
+        ani.save(gif_path, writer="pillow", fps=_frames // 5)
         print(f"GIF已保存到: {gif_path}")
 
     plt.show()
+
 
 if __name__ == "__main__":
     # 示例：将向量 v [3, 4, 5] 绕 k轴 [1, 1, 1] 旋转 180°
     v = np.array([3, 4, -5])
     k = np.array([1, 1, 1])
-    animate_rodrigues_rotation(v, k, _total_theta=np.pi/180*120, _frames=100, save_gif=True, gif_path="rodrigues_rotation.gif")
+    animate_rodrigues_rotation(
+        v,
+        k,
+        _total_theta=np.pi / 180 * 120,
+        _frames=100,
+        save_gif=True,
+        gif_path="rodrigues_rotation.gif",
+    )
