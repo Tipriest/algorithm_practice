@@ -70,15 +70,29 @@ def generate_per_instance_colors(
 def generate_shared_color(color_rgb: tuple[int, int, int])->np.ndarray:
     return np.array(color_rgb, dtype=np.uint8)
 
-def generated_animated_colors(
-    positions: np.ndarray, t:float, animation_mode: str="wave"
-)->np.ndarray:
-    n = position.shape[0]
-    if animation_mode == "wave":
-        # Wave pattern based on distance from center
-        distances = np.linalg.norm(positions[:, :2], axis = 1)
-        wave = np.sin(distances * 2)
-        colors = np.zeros((n, 3))
-        colors[:, 0] = wave
+# def generated_animated_colors(
+#     positions: np.ndarray, t:float, animation_mode: str="wave"
+# )->np.ndarray:
+#     n = position.shape[0]
+#     if animation_mode == "wave":
+#         # Wave pattern based on distance from center
+#         distances = np.linalg.norm(positions[:, :2], axis = 1)
+#         wave = np.sin(distances * 2)
+#         colors = np.zeros((n, 3))
+#         colors[:, 0] = wave
         
+
+def main():
+    # Load and prepare mesh data
+    # Add GUI controls
+    # Color controls
+    # Per Instance color controls
+    # Shared color controls
+    # Animated color controls
+    # Initialize transforms
+    # Create batched mesh visualization
+    # Create initial colors based on default mode.
+    # 
+    
+    
     
