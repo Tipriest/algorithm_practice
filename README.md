@@ -50,6 +50,66 @@
 ---
 
 ## 环境配置与运行说明
+
+### Python环境配置（推荐使用Conda）
+
+本项目提供了conda环境配置文件，适用于Ubuntu 20.04和22.04系统。
+
+#### 1. 安装Miniconda/Anaconda
+
+如果还未安装conda，请先安装：
+
+```bash
+# 下载Miniconda（推荐）
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+
+# 或下载Anaconda
+wget https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
+bash Anaconda3-2023.09-0-Linux-x86_64.sh
+```
+
+#### 2. 创建并激活环境
+
+```bash
+# 使用environment.yml创建环境
+conda env create -f environment.yml
+
+# 激活环境
+conda activate algo_practice
+```
+
+#### 3. 验证安装
+
+```bash
+# 验证Python版本
+python --version
+
+# 验证关键库
+python -c "import torch; import numpy; import sklearn; print('Environment ready!')"
+```
+
+#### 4. 环境管理常用命令
+
+```bash
+# 查看所有环境
+conda env list
+
+# 更新环境
+conda env update -f environment.yml --prune
+
+# 导出当前环境
+conda env export > environment_backup.yml
+
+# 删除环境
+conda env remove -n algo_practice
+
+# 退出环境
+conda deactivate
+```
+
+### C++环境配置
+
 leetcode使用的都是C++和Python的标准库，因此不需要额外的配置，因为已经配置好了`launch.json`文件，因此直接使用`F5`进行debug或者使用`Ctrl`+`F5`进行运行即可，在cpplib中对于一些库的练习可能需要使用者进行额外的安装
 
 
@@ -82,5 +142,3 @@ sudo apt install robotpkg-py3\*-example-robot-data
 ## 贡献
 
 欢迎提交 PR 或 issue 交流学习心得与改进建议！
-
----
