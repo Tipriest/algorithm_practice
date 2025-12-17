@@ -2,11 +2,13 @@ import threading
 import queue
 import time
 
+
 def producer(q, n):
     for i in range(n):
         print(f"Producing {i}")
         q.put(i)
         time.sleep(1)
+
 
 def consumer(q):
     while True:
@@ -15,6 +17,7 @@ def consumer(q):
             break
         print(f"Consuming {item}")
         q.task_done()
+
 
 q = queue.Queue()
 num_items = 50

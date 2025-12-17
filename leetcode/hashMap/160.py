@@ -1,12 +1,17 @@
 from typing import Optional
+
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, x):
         self.val = x
-        self.next: Optional['ListNode'] = None
+        self.next: Optional["ListNode"] = None
+
 
 class Solution:
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+    def getIntersectionNode(
+        self, headA: ListNode, headB: ListNode
+    ) -> Optional[ListNode]:
         visited = set()
         cur = headA
         while cur:
@@ -18,6 +23,7 @@ class Solution:
                 return cur
             cur = cur.next
         return None
+
 
 if __name__ == "__main__":
     # 构造测试用例
@@ -37,4 +43,3 @@ if __name__ == "__main__":
     headB.next.next.next = common
     result = solution.getIntersectionNode(headA, headB)
     print(f"result = {result.val if result else None}")
- 

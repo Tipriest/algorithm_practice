@@ -4,50 +4,6 @@
 
 ---
 
-## 目录结构
-├── .vscode  
-├── cpplibs  
-│   ├── eigen  
-│   ├── exception  
-│   ├── pinocchio  
-│   └── time  
-├── cpptest  
-│   ├── nan  
-│   └── nan.cpp  
-├── designPattern  
-├── leetcode  
-│   ├── arrayAndmatrix  
-│   ├── backTracking  
-│   ├── binaryOperation  
-│   ├── binaryTree  
-│   ├── design  
-│   ├── dynamicPlanning  
-│   ├── enum  
-│   ├── everyDayLeetcode  
-│   ├── geometry  
-│   ├── graph  
-│   ├── greedy  
-│   ├── hashMap  
-│   ├── linkedList  
-│   ├── math  
-│   ├── prefixSum  
-│   ├── priorityQueue  
-│   ├── recursive  
-│   ├── segmentTree  
-│   ├── simulation  
-│   ├── slidingWindow  
-│   ├── sort  
-│   ├── stackAndQueue  
-│   ├── string  
-│   ├── template.cpp  
-│   ├── template.py  
-│   ├── test  
-│   ├── twoPointers  
-│   └── weekComp  
-├── README.md  
-
-
----
 
 ## 环境配置与运行说明
 

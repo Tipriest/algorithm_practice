@@ -17,6 +17,7 @@ from scipy.spatial.transform import Rotation as R_  # 避免与变量名 R 冲�
 # R <-> 欧拉角
 # =============================
 
+
 def euler_to_rot(roll: float, pitch: float, yaw: float) -> np.ndarray:
     """
     欧拉角 -> 旋转矩阵
@@ -24,7 +25,7 @@ def euler_to_rot(roll: float, pitch: float, yaw: float) -> np.ndarray:
     顺序: Z-Y-X (yaw, pitch, roll)
     """
     # SciPy: from_euler('zyx', [z, y, x]) = [yaw, pitch, roll]
-    r = R_.from_euler('zyx', [yaw, pitch, roll])
+    r = R_.from_euler("zyx", [yaw, pitch, roll])
     return r.as_matrix()  # (3,3)
 
 
@@ -35,13 +36,14 @@ def rot_to_euler(R: np.ndarray) -> np.ndarray:
     """
     R = np.asarray(R, dtype=float).reshape(3, 3)
     r = R_.from_matrix(R)
-    yaw, pitch, roll = r.as_euler('zyx')  # 对应 Z-Y-X
+    yaw, pitch, roll = r.as_euler("zyx")  # 对应 Z-Y-X
     return np.array([roll, pitch, yaw])
 
 
 # =============================
 # R <-> 四元数
 # =============================
+
 
 def quat_to_rot(q: np.ndarray) -> np.ndarray:
     """
@@ -70,6 +72,7 @@ def rot_to_quat(R: np.ndarray) -> np.ndarray:
 # 欧拉角 <-> 四元数
 # =============================
 
+
 def euler_to_quat(roll: float, pitch: float, yaw: float) -> np.ndarray:
     """
     欧拉角 -> 四元数
@@ -93,6 +96,7 @@ def quat_to_euler(q: np.ndarray) -> np.ndarray:
 # 齐次变换 T <-> (R, t)
 # =============================
 
+
 def rt_to_T(R: np.ndarray, t: np.ndarray) -> np.ndarray:
     """
     (R, t) -> 齐次变换矩阵 T
@@ -101,10 +105,12 @@ def rt_to_T(R: np.ndarray, t: np.ndarray) -> np.ndarray:
     返回: T (4,4) = [R t; 0 1]
     """
     R = np.asarray(R, dtype=float).reshape(3, 3)
-    t = np.asarray(t, dtype=float).reshape(3,)
+    t = np.asarray(t, dtype=float).reshape(
+        3,
+    )
     T = np.eye(4)
     T[:3, :3] = R
-    T[:3, 3]  = t
+    T[:3, 3] = t
     return T
 
 
@@ -123,8 +129,10 @@ def T_to_rt(T: np.ndarray):
 # T <-> (欧拉角, t)
 # =============================
 
-def euler_t_to_T(roll: float, pitch: float, yaw: float,
-                 tx: float, ty: float, tz: float) -> np.ndarray:
+
+def euler_t_to_T(
+    roll: float, pitch: float, yaw: float, tx: float, ty: float, tz: float
+) -> np.ndarray:
     """
     (欧拉角, t) -> T
     """
@@ -148,6 +156,7 @@ def T_to_euler_t(T: np.ndarray):
 # =============================
 # T <-> (四元数, t)
 # =============================
+
 
 def quat_t_to_T(q: np.ndarray, t: np.ndarray) -> np.ndarray:
     """

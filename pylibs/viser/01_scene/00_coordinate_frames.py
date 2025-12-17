@@ -5,31 +5,30 @@ import viser
 server = viser.ViserServer()
 
 while True:
-    # Add some coordinate frames to the scene, 
+    # Add some coordinate frames to the scene,
     # These will be visualized in the viwer
     server.scene.add_frame(
         "/tree",
         wxyz=(1.0, 0.0, 0.0, 0.0),
-        position=(random.random()*2.0, 2.0, 0.2)
+        position=(random.random() * 2.0, 2.0, 0.2),
     )
     server.scene.add_frame(
         "/tree/branch",
         wxyz=(1.0, 0.0, 0.0, 0.0),
-        position=(random.random()*2.0, 2.0, 0.2)
+        position=(random.random() * 2.0, 2.0, 0.2),
     )
     leaf = server.scene.add_frame(
         "/tree/branch/leaf",
         wxyz=(1.0, 0.0, 0.0, 0.0),
-        position=(random.random()*2.0, 2.0, 0.2)
+        position=(random.random() * 2.0, 2.0, 0.2),
     )
-    
-    # Move the leaf randomly. Assigned properties are 
+
+    # Move the leaf randomly. Assigned properties are
     # automically updated in the visualizer
     for i in range(10):
         leaf.position = (random.random(), 2.0, 0.2)
         time.sleep(0.5)
-        
+
     # Remove the leaf node from the scene
     leaf.remove()
     time.sleep(0.5)
-    
