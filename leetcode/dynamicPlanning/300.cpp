@@ -15,27 +15,59 @@ struct TreeNode {
       : val(x), left(left), right(right) {}
 };
 
+// class Solution {
+// public:
+//   int lengthOfLIS(vector<int> &nums) {
+//     int n = nums.size();
+//     vector<int> dp(n, 1);
+//     for (int i = 1; i < n; i++) {
+//       int maxBeforeNum = dp[i];
+//       for (int j = 0; j < i; j++) {
+//         if (nums[j] < nums[i] && dp[j] >= maxBeforeNum) {
+//           dp[i] = dp[j] + 1;
+//           maxBeforeNum = dp[j];
+//         }
+//       }
+//     }
+//     return dp[n - 1];
+//   }
+// };
+class Solution1 {
+public:
+  int lengthOfLIS(vector<int> &nums) {
+    int n = nums.size();
+    vector<int> dp(n, 1);
+    // dp[i]是指以nums[i]结尾的子序列的最大长度
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < i; j++) {
+        if (nums[j] < nums[i]) {
+          dp[i] = max(dp[i], dp[j] + 1);
+        }
+      }
+    }
+    return *max_element(dp.begin(), dp.end());
+  }
+};
 class Solution {
 public:
   int lengthOfLIS(vector<int> &nums) {
     int n = nums.size();
     vector<int> dp(n, 1);
-    for (int i = 1; i < n; i++) {
-      int maxBeforeNum = dp[i];
+    // dp[i]是指以nums[i]结尾的子序列的最大长度
+    for (int i = 0; i < n; i++) {
       for (int j = 0; j < i; j++) {
-        if (nums[j] < nums[i] && dp[j] >= maxBeforeNum) {
-          dp[i] = dp[j] + 1;
-          maxBeforeNum = dp[j];
+        if (nums[j] < nums[i]) {
+          dp[i] = max(dp[i], dp[j] + 1);
         }
       }
     }
-    return dp[n - 1];
+    return *max_element(dp.begin(), dp.end());
   }
 };
 int main() {
   // 示例二叉树
   Solution solution;
-  vector<int> nums = {1, 3, 6, 7, 9, 4, 10, 5, 6};
+  vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 18};
   int result = solution.lengthOfLIS(nums);
   std::cout << "result: " << result << std::endl;
 }
