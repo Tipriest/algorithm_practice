@@ -42,16 +42,27 @@ public:
       }
     }
     int cost = INT32_MAX;
+    int close_time = -1;
     // 在第i时刻关门的代价
-    for(int i = 0; i < n; i++){
-        cost = min(cost, total_n - left_n);
-        if(customers[i] == 'Y'){
-            left_y++;
-        }else{
-            left_n++;
-        }
+    for (int i = 0; i < n; i++) {
+      int ncc = total_y - left_y + left_n;
+      if (ncc < cost) {
+        close_time = i;
+        cost = ncc;
+      }
+      if (customers[i] == 'Y') {
+        left_y++;
+      } else {
+        left_n++;
+      }
     }
     // 在第n时刻关门，也即一直不关门的代价
+    int ncc = left_n;
+    if (ncc < cost) {
+      close_time = n;
+      cost = ncc;
+    }
+    return close_time;
   }
 };
 int main() {
