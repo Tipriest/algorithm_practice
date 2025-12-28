@@ -2,6 +2,7 @@ from typing import List
 from queue import Queue
 from functools import cache
 
+
 class Solution:
     def maximumHappinessSum(self, happiness: List[int], k: int) -> int:
         happiness.sort(reverse=True)
@@ -11,12 +12,9 @@ class Solution:
         return res
 
 
-
 if __name__ == "__main__":
     solution = Solution()
-    grid = [['1','1','0','0','0'],
-            ['1','1','0','0','0'],
-            ['0','0','1','0','0'],
-            ['0','0','0','1','1']]
-    result = solution.numIslands(grid)
+    nums = [12, 1, 42]
+    k = 2
+    result = solution.maximumHappinessSum(nums, k)
     print(f"result = {result}")
