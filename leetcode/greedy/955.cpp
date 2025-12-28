@@ -4,7 +4,6 @@
 #include <limits.h>
 #include <map>
 #include <math.h>
-#include <numeric>
 #include <queue>
 #include <set>
 #include <stack>
@@ -30,45 +29,34 @@ struct ListNode {
 };
 class Solution {
 public:
-  int bestClosingTime(string customers) {
-    int n = customers.size();
-    int left_y = 0, left_n = 0;
-    int total_y = 0, total_n = 0;
-    for (int i = 0; i < n; i++) {
-      if ('Y' == customers[i]) {
-        total_y++;
-      } else {
-        total_n++;
+  int minDeletionSize(vector<string> &strs) {
+    int n = strs.size(), m = strs[0].size();
+    vector<string> a(n); //最终得到的字符串数组
+    int result = 0;
+    for (int j = 0; j < m; j++) {
+      bool del = false;
+      for (int i = 0; i < n - 1; i++) {
+        if (a[i] + strs[i][j] > a[i + 1] + strs[i + 1][j]) {
+          // j 列不是升序，必须要删除
+          result++;
+          del = true;
+          break;
+        }
+      }
+      if (!del) {
+        // j列是升序，不删更好
+        for (int i = 0; i < n; i++) {
+          a[i] += strs[i][j];
+        }
       }
     }
-    int cost = INT32_MAX;
-    int close_time = -1;
-    // 在第i时刻关门的代价
-    for (int i = 0; i < n; i++) {
-      int ncc = total_y - left_y + left_n;
-      if (ncc < cost) {
-        close_time = i;
-        cost = ncc;
-      }
-      if (customers[i] == 'Y') {
-        left_y++;
-      } else {
-        left_n++;
-      }
-    }
-    // 在第n时刻关门，也即一直不关门的代价
-    int ncc = left_n;
-    if (ncc < cost) {
-      close_time = n;
-      cost = ncc;
-    }
-    return close_time;
+    return result;
   }
 };
 int main() {
   // 示例二叉树
   Solution solution;
-  string customers = "YYNY";
-  int result = solution.bestClosingTime(customers);
+  vector<string> nums = {"xga", "xfb", "yfa"};
+  int result = solution.minDeletionSize(nums);
   std::cout << "result: " << result << std::endl;
 }
