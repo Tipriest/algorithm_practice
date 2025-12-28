@@ -43,13 +43,13 @@ public:
     }
     int cost = INT32_MAX;
     // 在第i时刻关门的代价
-    for(int i = 0; i < n; i++){
-        cost = min(cost, total_n - left_n);
-        if(customers[i] == 'Y'){
-            left_y++;
-        }else{
-            left_n++;
-        }
+    for (int i = 0; i < n; i++) {
+      cost = min(cost, total_n - left_n);
+      if (customers[i] == 'Y') {
+        left_y++;
+      } else {
+        left_n++;
+      }
     }
     // 在第n时刻关门，也即一直不关门的代价
   }
