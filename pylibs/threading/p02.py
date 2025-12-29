@@ -1,5 +1,8 @@
 import threading
+
 counter = 0  # 全局变量
+
+
 def test():
     def increment():
         global counter
@@ -17,6 +20,7 @@ def test():
 
     print("counter =", counter)
 
-if __name__ =="__main__":
+
+if __name__ == "__main__":
     for i in range(100):
         test()
