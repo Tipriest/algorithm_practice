@@ -15,7 +15,7 @@
 
 如果还未安装conda，请先安装：
 
-```bash
+```shell
 # 下载Miniconda（推荐）
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
@@ -37,7 +37,7 @@ conda activate algo_practice
 
 #### 3. 验证安装
 
-```bash
+```shell
 # 验证Python版本
 python --version
 
@@ -47,7 +47,7 @@ python -c "import torch; import numpy; import sklearn; print('Environment ready!
 
 #### 4. 环境管理常用命令
 
-```bash
+```shell
 # 查看所有环境
 conda env list
 

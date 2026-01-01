@@ -18,6 +18,4 @@ dependencies:
   - matplotlib[version='>=3.5.0']
   - tqdm
   - ipython
-  - meshcat-python
   - pytest
-  - pybullet

@@ -1,6 +1,4 @@
-"""_summary_
-
-"""
+"""_summary_"""
 
 import threading
 import time
