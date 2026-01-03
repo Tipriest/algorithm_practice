@@ -2,11 +2,13 @@ import rerun as rr
 
 from math import tau
 import numpy as np
-from rerun.utilities.data import build_color_spiral
-from rerun.utilities.util import bounce_lerp
+from rerun.utilities import build_color_spiral
+from rerun.utilities import bounce_lerp
 
 rr.init("rerun_example_dna_abacus")
-rr.connect_grpc(addr="rerun+http://192.168.2.2:9876")
+# TODO: for rerun version==0.27.2
+rr.connect_grpc("rerun+http://192.168.2.2:9876/proxy")
+# rr.connect_tcp()
 rr.set_time_seconds("stable_time", seconds=0)
 
 NUM_POINTS = 100

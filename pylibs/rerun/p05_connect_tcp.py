@@ -6,7 +6,10 @@ from rerun.utilities import build_color_spiral
 from rerun.utilities import bounce_lerp
 
 rr.init("rerun_example_dna_abacus")
-# rr.spawn()
+# TODO: for rerun version==0.27.2
+# rr.connect_grpc("rerun+http://192.168.2.2:9876/proxy")
+# TODO: for rerun version==0.22.1
+rr.connect_tcp("192.168.2.2:9876")
 rr.set_time_seconds("stable_time", seconds=0)
 
 NUM_POINTS = 100
