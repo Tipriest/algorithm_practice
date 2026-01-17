@@ -14,3 +14,6 @@ runs/
 *.exe
 .vscode/
 *.onnx
+
+*.avi
+*.mp4
