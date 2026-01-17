@@ -19,3 +19,6 @@ dependencies:
   - tqdm
   - ipython
   - pytest
+  - onnx[version='>=1.12.0,<2.0.0']
+  - onnxslim[version='>=0.1.71']
+  - onnxruntime-gpu
