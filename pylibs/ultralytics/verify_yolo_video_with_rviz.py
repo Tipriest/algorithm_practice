@@ -74,31 +74,11 @@ COLOR_MAP = {
     "52": [0.06651286659292832, 0.18323317724883714, 0.0038146436359496327],
     "53": [0.36997280704708546, 0.9432960429485308, 0.03432625360305519],
     "54": [0.24915975677176128, 0.9386229294676685, 0.10673158346845646],
-    "55": [0.11541869793632487, 0.8658858969125877, 0.6778310978258362],
-    "56": [0.05056615835472866, 0.17824357419948567, 0.5626314975974113],
-    "57": [0.9100085978007526, 0.28210642048904233, 0.5145638751007198],
-    "58": [0.034958999351108244, 0.9582198042714255, 0.34911686178377166],
-    "59": [0.9020044459634968, 0.009333577467231624, 0.39173199018999116],
-    "60": [0.8117711814609572, 0.8612002637049682, 0.927266075200756],
-    "61": [0.002325372972668105, 0.9444656772292778, 0.7455759896136358],
-    "62": [0.6872407646956532, 0.9060621548354879, 0.04663660263115044],
-    "63": [0.006299935642766208, 0.9163893069344804, 0.42394989855482057],
-    "64": [0.5279266966320123, 0.4457914434067628, 0.300904352202525],
-    "65": [0.21795491475933904, 0.9199666182960211, 0.8457662202538941],
-    "66": [0.4976921903410698, 0.9351828319659617, 0.9227789477890547],
-    "67": [0.4860718060202286, 0.8223361424499757, 0.18846254989198663],
-    "68": [0.722824999578309, 0.8454813222092247, 0.7034024690094571],
-    "69": [0.3069680170187067, 0.18071809294744245, 0.37637725950449097],
-    "70": [0.9407086806659349, 0.3648594225700752, 0.426900886700873],
-    "71": [0.6862859480243789, 0.5068931218119255, 0.025541006531197397],
-    "72": [0.2315966409927528, 0.1810025156563354, 0.8267215332547017],
-    "73": [0.8028753635372364, 0.5789568508026892, 0.8397013478121289],
-    "74": [0.6205237509526242, 0.17507745587194434, 0.3884921980447692],
-    "75": [0.5366508138524425, 0.06143717006081573, 0.778583965441572],
-    "76": [0.5351474326258382, 0.27377597942178966, 0.21264045127715803],
-    "77": [0.824870131939536, 0.9847925870005455, 0.21334257998611394],
-    "78": [0.39979790860979814, 0.9394048349780786, 0.9866027346196993],
-    "79": [0.3023256796468632, 0.7736023834267949, 0.8176492972233009],
+    "55": [
+        0.11541869793632487,
+        4267949,
+        0.8176492972233009,
+    ],  # 这一行有问题, 建议改成 0~1
     "80": [0.13734981446286865, 0.9392306517543818, 0.6937140444086529],
     "81": [0.3087905552061744, 0.5658756684718073, 0.09026476069109124],
     "82": [0.19255434895633994, 0.9101982610244425, 0.18692411270477927],
@@ -124,11 +104,17 @@ class YoloRos2Subscriber(Node):
 
         self.bridge = CvBridge()
 
+        # 订阅原始图像
         self.subscription = self.create_subscription(
             Image,
             "/camera/color/image_raw",
             self.image_callback,
             10,
+        )
+
+        # 新增：发布带框后的图像
+        self.image_pub = self.create_publisher(
+            Image, "/yolo/image_annotated", 10
         )
 
         self.initialized = False
@@ -216,11 +202,10 @@ class YoloRos2Subscriber(Node):
         if not self.initialized:
             self._lazy_initialize(cv_image)
 
-        if self.video_writer is None or not self.video_writer.isOpened():
-            return
         if self.model is None:
             return
 
+        # 目标检测推理
         results = self.model(cv_image, verbose=False)
         if len(results) > 0:
             result = results[0]
@@ -229,8 +214,12 @@ class YoloRos2Subscriber(Node):
             if boxes is not None and len(boxes) > 0:
                 for box in boxes:
                     x1, y1, x2, y2 = box.xyxy[0].cpu().numpy().astype(int)
+
                     conf = float(box.conf[0].cpu().numpy())
                     cls_id = int(box.cls[0].cpu().numpy())
+                    print(
+                        f"x1: {x1}, y1: {y1}, x2: {x2}, y2: {y2}, conf: {conf}, cls_id: {cls_id}"
+                    )
 
                     # 取类别名
                     if self.class_names and 0 <= cls_id < len(self.class_names):
@@ -240,20 +229,17 @@ class YoloRos2Subscriber(Node):
 
                     text = f"{label} {conf:.2f}"
 
-                    # ==== 关键修改：根据类别 id 取颜色 ====
+                    # 根据类别 id 取颜色
                     key = str(cls_id)
                     if key in COLOR_MAP:
                         r, g, b = COLOR_MAP[key]  # 0~1 RGB
-                        # 转成 0~255 BGR 给 OpenCV
                         color = (
                             int(b * 255),
                             int(g * 255),
                             int(r * 255),
                         )
                     else:
-                        # 如果该 id 不在表中，退回到默认绿色
-                        color = (0, 255, 0)
-                    # ==================================
+                        color = (0, 255, 0)  # 默认绿色
 
                     cv2.rectangle(cv_image, (x1, y1), (x2, y2), color, 2)
                     cv2.putText(
@@ -267,12 +253,22 @@ class YoloRos2Subscriber(Node):
                         cv2.LINE_AA,
                     )
 
-        self.video_writer.write(cv_image)
+        # 写入视频
+        if self.video_writer is not None and self.video_writer.isOpened():
+            self.video_writer.write(cv_image)
+            self.frame_count += 1
+            if self.frame_count > self.pbar.total:
+                self.pbar.total = self.frame_count
+            # self.pbar.update(1)
 
-        self.frame_count += 1
-        if self.frame_count > self.pbar.total:
-            self.pbar.total = self.frame_count
-        self.pbar.update(1)
+        # ==== 新增：发布带框后的图像到 ROS2 ====
+        try:
+            annotated_msg = self.bridge.cv2_to_imgmsg(cv_image, encoding="bgr8")
+            annotated_msg.header = msg.header  # 继承时间戳和 frame_id
+            self.image_pub.publish(annotated_msg)
+        except Exception as e:
+            self.get_logger().error(f"Failed to publish annotated image: {e}")
+        # =====================================
 
     def check_timeout(self):
         if self.last_msg_time is not None:
@@ -288,7 +284,8 @@ class YoloRos2Subscriber(Node):
     def cleanup(self):
         if self.pbar is not None:
             if self.frame_count < self.pbar.total:
-                self.pbar.update(self.pbar.total - self.frame_count)
+                # self.pbar.update(self.pbar.total - self.frame_count)
+                pass
             self.pbar.close()
 
         if self.video_writer is not None:
@@ -317,13 +314,13 @@ def main():
 
     rclpy.init()
 
-    model_path = "/home/tipriest/Downloads/yolo_results/yolo11_l_best.pt"
+    model_path = "/home/tipriest/Downloads/yolo_results/last.pt"
     class_labels_path = "/home/tipriest/Documents/algorithm_practice/pylibs/ultralytics/self_trained.txt"
 
     node = YoloRos2Subscriber(
         model_path=model_path,
         class_labels_path=class_labels_path,
-        video_output_path="output.mp4",
+        video_output_path=f"/home/tipriest/Videos/output_{time.time()}.mp4",
         msg_timeout=5.0,
         fps=5,
     )

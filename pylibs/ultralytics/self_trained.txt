@@ -81,8 +81,8 @@ toothbrush
 carpet
 table lamp
 nightstand
-play tent ############
-building blocks #############
+play tent
+building blocks
 bookshelf
 gas stove
 pot

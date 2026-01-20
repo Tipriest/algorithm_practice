@@ -177,3 +177,9 @@ def T_to_quat_t(T: np.ndarray):
     R, t = T_to_rt(T)
     q = rot_to_quat(R)
     return q, t
+
+
+if __name__ == "__main__":
+    # R: np.ndarray = np.array([0,0,1,-1,0,0,0,-1,0])
+    # print(rot_to_euler(R))
+    print(euler_to_rot(-0, 1.57079633+0.366333333, -1.57079633))
