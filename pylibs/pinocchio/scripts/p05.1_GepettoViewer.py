@@ -1,5 +1,7 @@
 # 注意：这个例子需要安装 gepetto-gui
 # 使用方法：先启动 gepetto-gui，然后运行此脚本
+# conda install gepetto-viewer gepetto-viewer-corba -c conda-forge
+# gepetto-gui
 
 import sys
 from pathlib import Path

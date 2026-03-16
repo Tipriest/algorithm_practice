@@ -43,3 +43,12 @@ for name, oMi in zip(model.names, data.oMi):
     print(
         "{:<24} : {: .2f} {: .2f} {: .2f}".format(name, *oMi.translation.T.flat)
     )
+
+
+print("robot.nq =", robot.nq)
+print("robot.nv =", robot.nv)
+print("model.nq =", robot.model.nq)
+print("model.nv =", robot.model.nv)
+print("model.njoints =", robot.model.njoints)
+print("len(oMi) =", len(robot.data.oMi))
+print("len(joint placements) =", len(robot.data.oMi))  # 与 njoints 应相同
