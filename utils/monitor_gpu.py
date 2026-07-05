@@ -26,6 +26,43 @@ from collections import deque
 from dataclasses import dataclass, field
 from typing import Deque, List, Optional, Sequence, Tuple
 
+import matplotlib
+
+matplotlib.rcParams["toolbar"] = "None"
+
+
+def _prepare_frozen_gui() -> None:
+    """Work around Pillow/Tk issues inside a PyInstaller bundle."""
+    if not getattr(sys, "frozen", False):
+        return
+
+    for mod in ("PIL._imagingtk", "PIL._tkinter_finder", "PIL.ImageTk"):
+        try:
+            __import__(mod)
+        except ImportError:
+            pass
+
+    try:
+        from PIL import ImageTk, _imagingtk
+
+        _orig_init = ImageTk.PhotoImage.__init__
+
+        def _photo_init(self, *args, **kwargs):
+            master = kwargs.get("master")
+            if master is not None:
+                try:
+                    _imagingtk.tkinit(master.tk.interpaddr())
+                except Exception:
+                    pass
+            _orig_init(self, *args, **kwargs)
+
+        ImageTk.PhotoImage.__init__ = _photo_init
+    except Exception:
+        pass
+
+
+_prepare_frozen_gui()
+
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import psutil

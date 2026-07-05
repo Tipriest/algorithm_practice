@@ -17,3 +17,8 @@ runs/
 
 *.avi
 *.mp4
+
+# AppImage / PyInstaller packaging (sources under packaging/appimage/ stay tracked)
+packaging/appimage/build/
+packaging/appimage/dist/
+*.AppImage

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Monitor GPU
+GenericName=System Monitor
+Comment=Real-time GPU VRAM, power, memory and CPU charts
+Exec=monitor-gpu
+Icon=monitor-gpu
+Type=Application
+Categories=System;Monitor;
+Terminal=false
+StartupNotify=true
