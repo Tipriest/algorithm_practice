@@ -28,35 +28,37 @@ struct ListNode {
   ListNode(int x) : val(x), next(nullptr) {}
   ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
-// 阶乘
-int Frac(int i) {
-  if (i <= 0) {
-    return 1;
-  } else if (1 == i) {
-    return 1;
-  }
-  return i * Frac(i - 1);
-}
-// C n m
-int Csel(int n, int m) { return Frac(n) / (Frac(m) * Frac(n - m)); }
+
 class Solution {
+  const int mod = 1e9 + 7;
+
 public:
   int numOfSubarrays(vector<int> &arr) {
     int n = arr.size();
-    vector<int> prefixSum(n, 0);
-    prefixSum[0] = arr[0];
+    // 包含这个值的偶数组，或者奇数组的数量
+    vector<int> Even(n, 0), Odd(n, 0);
+    if (0 == arr[0] % 2) {
+      Even[0]++;
+    } else {
+      Odd[0]++;
+    }
     for (int i = 1; i < n; i++) {
-      prefixSum[i] = prefixSum[i - 1] + arr[i];
+      if (0 == arr[i] % 2) {
+        // 当前的这个数是偶数
+        Even[i] = Even[i - 1] + 1;
+        Odd[i] = Odd[i - 1];
+      } else {
+        // 当前的这个数是奇数
+        Even[i] = Odd[i - 1];
+        Odd[i] = Even[i - 1] + 1;
+      }
     }
-    int result = 0;
-    vector<int> odd_num(n, 0), even_num(n, 0);
+    int sum = 0;
+
     for (int i = 0; i < n; i++) {
-      odd_num[i] += (0 != prefixSum[i] % 2);
-      even_num[i] += (0 == prefixSum[i] % 2);
+      sum = (sum + Odd[i]) % mod;
     }
-    if (0 == prefixSum[n - 1] % 2) {
-      
-    } 
+    return sum;
   }
 };
 
